@@ -7,13 +7,13 @@ title: 古月|个人博客
 subtitle: ''
 description: ''
 keywords:
-author: Asura
+author: 古月
 language: zh-CN
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://asurahu.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -100,6 +100,9 @@ ignore:
 theme: fluid
 
 # Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
+## Docs: https://hexo.io/docs/one-command-deployment   https://asurahu.github.io
 deploy:
-  type: ''
+  type: git
+  repo: git@github.com:AsuraHu/AsuraHu.github.io.git
+  branch: master
+  message: '初始化'
