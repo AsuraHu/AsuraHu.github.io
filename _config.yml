@@ -40,7 +40,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
@@ -100,9 +100,10 @@ ignore:
 theme: fluid
 
 # Deployment
-## Docs: https://hexo.io/docs/one-command-deployment   https://asurahu.github.io
+## Docs: https://hexo.io/docs/one-command-deployment
+## url: https://asurahu.github.io
 deploy:
   type: git
   repo: git@github.com:AsuraHu/AsuraHu.github.io.git
   branch: master
-  message: '初始化'
+  message: 'hexo、fluid、GitHub pages'
