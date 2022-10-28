@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="古月">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 路由懒加载说明：路由懒加载可以让我们的包不需要一次把所有的页面的加载进来，只加载当前页面的路由组件就行。​举例：如果这样写，加载的时候会全部都加载进来。 12345678910111213const router &#x3D; new VueRouter(&amp;#123;  routes:[    &amp;#123;      path: &amp;#x27;&#x2F;&amp;#x27;,      name: &amp;#x27;Home">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 小技巧">
+<meta property="og:url" content="https://asurahu.github.io/2022/09/19/vue/vue-tips/index.html">
+<meta property="og:site_name" content="古月|个人博客">
+<meta property="og:description" content="1. 路由懒加载说明：路由懒加载可以让我们的包不需要一次把所有的页面的加载进来，只加载当前页面的路由组件就行。​举例：如果这样写，加载的时候会全部都加载进来。 12345678910111213const router &#x3D; new VueRouter(&amp;#123;  routes:[    &amp;#123;      path: &amp;#x27;&#x2F;&amp;#x27;,      name: &amp;#x27;Home">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asurahu.github.io/img/vue/vue.jpeg">
+<meta property="article:published_time" content="2022-09-19T06:44:39.000Z">
+<meta property="article:modified_time" content="2022-10-28T15:42:05.785Z">
+<meta property="article:author" content="古月">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://asurahu.github.io/img/vue/vue.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Vue 小技巧 - 古月|个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"asurahu.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>古月|个人博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Vue 小技巧"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        古月
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-19 14:44" pubdate>
+          2022年9月19日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          67 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue 小技巧</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="1-路由懒加载"><a href="#1-路由懒加载" class="headerlink" title="1. 路由懒加载"></a>1. 路由懒加载</h3><p><font color="red">说明：</font>路由懒加载可以让我们的包不需要一次把所有的页面的加载进来，只加载当前页面的路由组件就行。<br>​<font color="red">举例：</font>如果这样写，加载的时候会全部都加载进来。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>:[<br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Home&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">Home</span><br>    &#125;,&#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/about&#x27;</span>,<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;About&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-title class_">About</span><br>    &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>所以，应该避免上面的写法，尽量使用懒加载。<br>​懒加载写法：结合 <font color="red">webpack</font> 的 <font color="red">import</font> 使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>:[<br>    &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;Home&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">import</span>(<span class="hljs-comment">/* webpackChunkName: &quot;home&quot; */</span> <span class="hljs-string">&#x27;../views/Home.vue&#x27;</span>)<br>    &#125;, &#123;<br>      <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/about&#x27;</span>,<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;About&#x27;</span>,<br>      <span class="hljs-attr">component</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">import</span>(<span class="hljs-comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="hljs-string">&#x27;../views/About.vue&#x27;</span>)<br>    &#125;<br>  ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<hr>
+<h3 id="2-Object-freeze方法"><a href="#2-Object-freeze方法" class="headerlink" title="2. Object.freeze方法"></a>2. <font color="red">Object.freeze</font>方法</h3><p>​ <font color="red">说明：</font>vue初始化的时候会将data里面的数据都搞成响应式数据。但是，我们在写业务逻辑的时候会有些数据一初始化就永远不会改变，它根本就不需要被vue做成响应式数据，因此我们应该将这些不用改变的数据通过Object.freeze方法冻结它，避免vue初始化的时候，做一些无用的操作。<br>​ <font color="red">get：</font><font color="red">Object.freeze() </font>方法可以冻结一个对象，冻结指的是不能向这个对象添加新的属性，不能修改其已有属性的值，不能删除已有属性，以及不能修改该对象已有属性的可枚举性、可配置性、可写性。该方法返回被冻结的对象。对于data或vuex里使用freeze冻结了的对象，vue不会做getter和setter的转换。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">data</span>:<span class="hljs-function">()=&gt;</span>(&#123;<br>    <span class="hljs-attr">list</span>:<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">freeze</span>([&#123;<span class="hljs-attr">title</span>:<span class="hljs-string">&#x27;我永远不需要改变，我不需要响应式&#x27;</span>&#125;])<br>  &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>个人理解：这个方法平时在项目可以使用，如某些固定的标题、按钮文字、渲染大量的固定数据列表等。</p>
+<hr>
+<h3 id="3-异步组件"><a href="#3-异步组件" class="headerlink" title="3. 异步组件"></a>3. 异步组件</h3><p>​ <font color="red">说明：</font>异步组件可以让我们在需要一些组件时才将它加载进来，而不是一初始化就加载进来，这跟路由懒加载时一个概念。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 简单写法</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">components</span>:&#123;<br>    <span class="hljs-title class_">AsyncComponent</span>:<span class="hljs-function">()=&gt;</span><span class="hljs-title function_">import</span>(<span class="hljs-comment">/* webpackChunkName: &quot;AsyncComponent&quot; */</span> <span class="hljs-string">&#x27;./Async&#x27;</span>)<br>  &#125;<br>&#125;<br><span class="hljs-comment">// 完善写法</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  <span class="hljs-attr">components</span>:&#123;<br>    <span class="hljs-title class_">AsyncComponent</span>:<span class="hljs-function">()=&gt;</span>(&#123;<br>      <span class="hljs-attr">component</span>:<span class="hljs-title function_">import</span>(<span class="hljs-comment">/* webpackChunkName: &quot;AsyncComponent&quot; */</span> <span class="hljs-string">&#x27;./Async&#x27;</span>),<br>      <span class="hljs-attr">delay</span>:<span class="hljs-number">200</span>, <span class="hljs-comment">// 延迟几毫秒，默认200</span><br>      <span class="hljs-attr">timeout</span>:<span class="hljs-number">3000</span>, <span class="hljs-comment">// 加载几毫秒之后就超时，触发error组件</span><br>      <span class="hljs-attr">loading</span>:<span class="hljs-title class_">LoadingComponent</span>, <span class="hljs-comment">// 组件未加载回来前显示</span><br>      <span class="hljs-attr">error</span>:<span class="hljs-title class_">ErrorComponent</span> <span class="hljs-comment">// 组件超时时显示</span><br>    &#125;)<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​ <font color="red">个人理解：</font>异步组件的完善写法，相对来说更加人性化，也能给用户更好的使用体验，在一些ui框架中应该就使用了这种方式吧。</p>
+<hr>
+<h3 id="4-computed中使用this？"><a href="#4-computed中使用this？" class="headerlink" title="4.  computed中使用this？"></a>4.  computed中使用this？</h3><p>​ <font color="red">说明：</font>在<code>computed</code>属性中通过<code>this.xxx</code>去拿<code>data</code>里面的数据，和methods里面的方法，或许还会通过<code>this.route</code>去获取路由里面的数据。其实可以避免这些丑陋的<code>this</code>，它甚至会给我们带来看不见的性能问题。实现上，我们通过<code>this</code>能访问到的数据，在<code>computed</code>的第一个参数上都能结构出来。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>   <span class="hljs-title function_">haha</span>(<span class="hljs-params">&#123;$attrs,$route,$store,$listeners,$ref&#125;</span>)&#123;<br>     <span class="hljs-comment">// 还能结构很多属性</span><br>     <span class="hljs-keyword">return</span><br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>​ <font color="red">个人理解：</font>这是一个很不错的知识，在之前我也是通过 <code>this.xxx</code> 去获取想要的数据或者方法。学到了，学到了！！！</p>
+<hr>
+<h3 id="5-避免v-if和v-for一起使用"><a href="#5-避免v-if和v-for一起使用" class="headerlink" title="5. 避免v-if和v-for一起使用"></a>5. 避免v-if和v-for一起使用</h3><p>​ <font color="red">说明：</font>从vue官网上就明确说明：<strong>不推荐</strong>在同一元素上使用 <code>v-if</code> 和 <code>v-for</code>。<br>​ 在<code>vue</code>的源码中有一段代码时对指令的优先级的处理，这段代码是先处理<code>v-for</code>再处理<code>v-if</code>的。所以如果我们在同一层中一起使用两个指令，会出现一些不必要的性能问题，比如这个列表有一百条数据，再某种情况下，它们都不需要显示，当vue还是会循环这个100条数据显示，再去判断<code>v-if</code>，因此，我们应该避免这种情况的出现。<br>​ <font color="red">推荐方式：</font></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot;(item, index) in list&quot;</span> <span class="hljs-attr">:key</span>=<span class="hljs-string">&quot;item.id&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;&#123;item.value&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>​ <font color="red">补充：</font> 根据官网说明，可以用 <code>of</code> 替代 <code>in</code> 作为分隔符，因为它更接近 JavaScript 迭代器的语法</p>
+<hr>
+<h3 id="6-sync修饰符"><a href="#6-sync修饰符" class="headerlink" title="6. .sync修饰符"></a>6. <code>.sync</code>修饰符</h3><p>​ <font color="red">说明：</font>在有些情况下，我们可能需要对一个 prop 进行“双向绑定”。不幸的是，真正的双向绑定会带来维护上的问题，因为子组件可以变更父组件，且在父组件和子组件两侧都没有明显的变更来源。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs html">// 父组件<br> <br> template&gt;<br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Toggle</span> <span class="hljs-attr">:show.sync</span> = <span class="hljs-string">&#x27;show&#x27;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Toggle</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br>//Toggle 组件<br><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;show&quot;</span>&gt;</span><br>    展示和隐藏组件<br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;test&quot;</span>&gt;</span>隐藏组件<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-attr">props</span>:[<span class="hljs-string">&#x27;show&#x27;</span>],</span><br><span class="language-javascript">  <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">test</span>(<span class="hljs-params"></span>)&#123;</span><br><span class="language-javascript">      <span class="hljs-variable language_">this</span>.$emit(<span class="hljs-string">&#x27;update:show&#x27;</span>,<span class="hljs-literal">false</span>)</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>​ <font color="red">补充：</font>注意带有 <code>.sync</code> 修饰符的 <code>v-bind</code> <strong>不能</strong>和表达式一起使用 (例如 <code>v-bind:title.sync=”doc.title + ‘!’”</code> 是无效的)。取而代之的是，你只能提供你想要绑定的 property 名，类似 <code>v-model</code>。</p>
+<hr>
+<h3 id="7-v-model-的修饰符"><a href="#7-v-model-的修饰符" class="headerlink" title="7. v-model 的修饰符"></a>7. <code>v-model</code> 的修饰符</h3><p>lazy：可以将@input事件变成@blur事件<br>number：只能输入数字值<br>trim：清空两边的空格</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html">//lazy<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">v-model.lazy</span>=<span class="hljs-string">&quot;msg&quot;</span> /&gt;</span><br>//number<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">v-model.number</span>=<span class="hljs-string">&quot;msg&quot;</span> /&gt;</span><br>//trim<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">v-model.trim</span>=<span class="hljs-string">&quot;msg&quot;</span> /&gt;</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="8-scrollBehavior-钩子，滚动页面"><a href="#8-scrollBehavior-钩子，滚动页面" class="headerlink" title="8. scrollBehavior 钩子，滚动页面"></a>8. <code>scrollBehavior</code> 钩子，滚动页面</h3><p>​ <font color="red">说明：</font>有些时候我们在操作一下页面的滚动行为，那么我们第一时间就会想到 <code>scrollTop</code>。其实我们还有第二个选择就是 <code>VueRouter</code> 给我们提供的 <code>scrollBehavior</code> 钩子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>  <span class="hljs-attr">routes</span>:[...] ,<br>  <span class="hljs-title function_">scrollBehavior</span>(<span class="hljs-params">to,<span class="hljs-keyword">from</span>,position</span>)&#123;<br>      <span class="hljs-comment">// position参数，点击浏览器左右箭头会触发</span><br>      <span class="hljs-keyword">return</span>&#123;<br>          <span class="hljs-comment">// 这里可以返回很多参数，下面简单列就几个</span><br>          <span class="hljs-attr">x</span>:<span class="hljs-number">100</span>,<br>          <span class="hljs-attr">y</span>:<span class="hljs-number">100</span>,<br>          <span class="hljs-attr">selector</span>:#app,<br>          <span class="hljs-attr">offset</span>:<span class="hljs-number">200</span>,<br>          <span class="hljs-comment">//等等</span><br>      &#125;<br>  &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<hr>
+<h3 id="9-子组件上定义的原生事件"><a href="#9-子组件上定义的原生事件" class="headerlink" title="9.  子组件上定义的原生事件"></a>9.  子组件上定义的原生事件</h3><p>​ <font color="red">说明：</font>有时候我们想在子组件上面监听一些事件，比如click，但是不论你怎么点，它都没反应，为什么呢？</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;test&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>:&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">test</span>(<span class="hljs-params"></span>)&#123;&#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>​ 因为这样写<code>vue</code>会认为，你自定义了一个<code>click</code>事件，要在子组件通过<code>$emit(&#39;click&#39;)</code>触发才行。如果我就是要在父组件触发呢？那就要用到<code>native</code>修饰符了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">Child</span> @<span class="hljs-attr">click.native</span>=<span class="hljs-string">&quot;test&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Child</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">    <span class="hljs-attr">methods</span>:&#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">test</span>(<span class="hljs-params"></span>)&#123;&#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<hr>
+<h3 id="10-Vue-性能优化方式及原理"><a href="#10-Vue-性能优化方式及原理" class="headerlink" title="10. Vue 性能优化方式及原理"></a>10. Vue 性能优化方式及原理</h3><h4 id="1-使用v-slot-slotName，而不是slot-quot-slotName-quot"><a href="#1-使用v-slot-slotName，而不是slot-quot-slotName-quot" class="headerlink" title="1.  使用v-slot:slotName，而不是slot=&quot;slotName&quot;"></a>1.  使用<code>v-slot:slotName</code>，而不是<code>slot=&quot;slotName&quot;</code></h4><p>​ <code>v-slot</code>是 2.6 新增的语法，具体可查看:Vue2.6，2.6 发布已经是快两年前的事情了，但是现在仍然有不少人仍然在使用<code>slot=&quot;slotName&quot;</code>这个语法。虽然这两个语法都能达到相同的效果，但是内部的逻辑确实不一样的，<strong>旧的写法是将插槽内容作为 children 渲染的，会在父组件的渲染函数中创建，插槽内容的依赖会被父组件收集（name 的 dep 收集到父组件的渲染 watcher），而新的写法将插槽内容放在了 scopedSlots 中，会在子组件的渲染函数中调用，插槽内容的依赖会被子组件收集（name 的 dep 收集到子组件的渲染 watcher）</strong>，最终导致的结果就是：当我们修改 name 这个属性时，旧的写法是调用父组件的更新（调用父组件的渲染 watcher），然后在父组件更新过程中调用子组件更新（prePatch &#x3D;&gt; updateChildComponent），而新的写法则是直接调用子组件的更新（调用子组件的渲染 watcher）。</p>
+<hr>
+<h4 id="2-使用计算属性"><a href="#2-使用计算属性" class="headerlink" title="2. 使用计算属性"></a>2. 使用计算属性</h4><p>​ 计算属性最大的一个特点就是它是可以被缓存的，这个缓存指的是只要它的依赖的不发生改变，它就不会被重新求值，再次访问时会直接拿到缓存的值，在做一些复杂的计算时，可以极大提升性能。可以看以下代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#123;&#123;superCount&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">        <span class="hljs-attr">count</span>: <span class="hljs-number">1</span></span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript">    <span class="hljs-attr">computed</span>: &#123;</span><br><span class="language-javascript">      <span class="hljs-title function_">superCount</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">        <span class="hljs-keyword">let</span> superCount = <span class="hljs-variable language_">this</span>.<span class="hljs-property">count</span></span><br><span class="language-javascript">        <span class="hljs-comment">// 假设这里有个复杂的计算</span></span><br><span class="language-javascript">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) &#123;</span><br><span class="language-javascript">          superCount++</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        <span class="hljs-keyword">return</span> superCount</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>​ 这个例子中，在 created、mounted 以及模板中都访问了 superCount 属性，这三次访问中，实际上只有第一次即<code>created</code>时才会对 superCount 求值，由于 count 属性并未改变，其余两次都是直接返回缓存的 value。</p>
+<hr>
+<h4 id="3-使用函数式组件"><a href="#3-使用函数式组件" class="headerlink" title="3. 使用函数式组件"></a>3. 使用函数式组件</h4><p>​ 对于某些组件，如果我们只是用来显示一些数据，不需要管理状态，监听数据等，那么就可以用函数式组件。函数式组件是无状态的，无实例的，在初始化时不需要初始化状态，不需要创建实例，也不需要去处理生命周期等，相比有状态组件，会更加轻量，同时性能也更好。</p>
+<hr>
+<h4 id="4-结合场景使用-v-show-和-v-if"><a href="#4-结合场景使用-v-show-和-v-if" class="headerlink" title="4. 结合场景使用 v-show 和 v-if"></a>4. 结合场景使用 v-show 和 v-if</h4><p>​ <code>v-if</code> 的部分被转换成了一个三元表达式，visible 为 true 时，创建一个 <code>UserProfile</code> 的 <code>vnode</code>，否则创建一个空 <code>vnode</code>，在 <code>patch</code> 的时候，新旧节点不一样，就会移除旧的节点或创建新的节点，这样的话<code>UserProfile</code>也会跟着创建 &#x2F; 销毁。如果<code>UserProfile</code>组件里有很多 DOM，或者要执行很多初始化 &#x2F; 销毁逻辑，那么随着 visible 的切换，势必会浪费掉很多性能。<br>​ 和 v-if 相比，v-show不需要在 <code>patch</code> 阶段创建 &#x2F; 移除节点，只是根据<code>v-show</code>上绑定的值来控制 DOM 元素的<code>style.display</code>属性，在频繁切换的场景下就可以节省很多性能。<br>​ <code>v-if</code>的优势体现在初始化时，<code>v-show</code>体现在更新时，当然并不是要求你绝对按照这个方式来，比如某些组件初始化时会请求数据，而你想先隐藏组件，然后在显示时能立刻看到数据，这时候就可以用<code>v-show</code>，又或者你想每次显示这个组件时都是最新的数据，那么你就可以用<code>v-if</code>，所以我们要结合具体业务场景去选一个合适的方式。</p>
+<hr>
+<h4 id="5-使用-keep-alive"><a href="#5-使用-keep-alive" class="headerlink" title="5.使用 keep-alive"></a>5.使用 keep-alive</h4><p>​ <code>keep-alive</code>的作用就是将它包裹的组件在第一次渲染后就缓存起来，下次需要时就直接从缓存里面取，避免了不必要的性能浪费，在讨论上个问题时，说的是<code>v-show</code>初始时性能压力大，因为它要创建所有的组件，其实可以用<code>keep-alive</code>优化下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">UserProfileA</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;visible&quot;</span> /&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">UserProfileB</span> <span class="hljs-attr">v-else</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>​ 这样的话，初始化时不会渲染<code>UserProfileB</code>组件，当切换<code>visible</code>时，才会渲染<code>UserProfileB</code>组件，同时被<code>keep-alive</code>缓存下来，频繁切换时，由于是直接从缓存中取，所以会节省很多性能，所以这种方式在初始化和更新时都有较好的性能。<br>​ 但是<code>keep-alive</code>并不是没有缺点，组件被缓存时会占用内存，属于空间和时间上的取舍，在实际开发中要根据场景选择合适的方式。</p>
+<hr>
+<h4 id="6-始终为-v-for-添加-key，并且不要将-index-作为的-key"><a href="#6-始终为-v-for-添加-key，并且不要将-index-作为的-key" class="headerlink" title="6. 始终为 v-for 添加 key，并且不要将 index 作为的 key"></a>6. 始终为 v-for 添加 key，并且不要将 index 作为的 key</h4><p>​ 这一点是 Vue 风格指南中明确指出的一点，很多人都习惯的将 index 作为 key，这样其实是不太好的，index 作为 key 时，将会让 <font color="red">diff 算法产生错误的判断</font>，从而带来一些性能问题，你可以看下 ssh 大佬的文章，深入分析下，为什么 Vue 中不要用 index 作为 key。在这里我也通过一个例子来简单说明下当 index 作为 key 时是如何影响性能的。</p>
+<hr>
+<h4 id="7-延迟渲染"><a href="#7-延迟渲染" class="headerlink" title="7. 延迟渲染"></a>7. 延迟渲染</h4><p>​ 延迟渲染就是分批渲染，假设我们某个页面里有一些组件在初始化时需要执行复杂的逻辑：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- Heavy组件初始化时需要执行很复杂的逻辑，执行大量计算 --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy1</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy2</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy3</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy4</span> /&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>​ 这将会占用很长时间，导致帧数下降、卡顿，其实可以使用分批渲染的方式来进行优化，就是先渲染一部分，再渲染另一部分：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;defer(1)&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;defer(2)&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;defer(3)&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">Heavy</span> <span class="hljs-attr">v-if</span>=<span class="hljs-string">&quot;defer(4)&quot;</span> /&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="language-javascript">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="language-javascript">      <span class="hljs-attr">displayPriority</span>: <span class="hljs-number">0</span></span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;,</span><br><span class="language-javascript">  <span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">runDisplayPriority</span>()</span><br><span class="language-javascript">  &#125;,</span><br><span class="language-javascript">  <span class="hljs-attr">methods</span>: &#123;</span><br><span class="language-javascript">    <span class="hljs-title function_">runDisplayPriority</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">const</span> <span class="hljs-title function_">step</span> = (<span class="hljs-params"></span>) =&gt; &#123;</span><br><span class="language-javascript">        <span class="hljs-title function_">requestAnimationFrame</span>(<span class="hljs-function">() =&gt;</span> &#123;</span><br><span class="language-javascript">          <span class="hljs-variable language_">this</span>.<span class="hljs-property">displayPriority</span>++</span><br><span class="language-javascript">          <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">displayPriority</span> &lt; <span class="hljs-number">10</span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-title function_">step</span>()</span><br><span class="language-javascript">          &#125;</span><br><span class="language-javascript">        &#125;)</span><br><span class="language-javascript">      &#125;</span><br><span class="language-javascript">      <span class="hljs-title function_">step</span>()</span><br><span class="language-javascript">    &#125;,</span><br><span class="language-javascript">    <span class="hljs-title function_">defer</span>(<span class="hljs-params">priority</span>) &#123;</span><br><span class="language-javascript">      <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">displayPriority</span> &gt;= priority</span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">  &#125;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>​ 其实原理很简单，主要是维护<code>displayPriority</code>变量，通过<code>requestAnimationFrame</code>在每一帧渲染时自增，然后我们就可以在组件上通过<code>v-if=&quot;defer(n)&quot;</code>使<code>displayPriority</code>增加到某一值时再渲染，这样就可以避免 js 执行时间过长导致的卡顿问题了。</p>
+<hr>
+<h4 id="8-使用非响应式数据"><a href="#8-使用非响应式数据" class="headerlink" title="8. 使用非响应式数据"></a>8. 使用非响应式数据</h4><p>​ 见 2. <font color="red">Object.freeze</font>方法</p>
+<hr>
+<h4 id="9-BASE64图片展示（后端给BASE64数据，前端展示图片）"><a href="#9-BASE64图片展示（后端给BASE64数据，前端展示图片）" class="headerlink" title="9. BASE64图片展示（后端给BASE64数据，前端展示图片）"></a>9. BASE64图片展示（后端给BASE64数据，前端展示图片）</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">:src</span>=<span class="hljs-string">&quot;imgData&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span><br><br>let imgData = &#x27;data:image/png;base64,&#x27; + res.data.imgrq // 后端返回的数据<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Vue/" class="category-chain-item">Vue</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Vue/">#Vue</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Vue 小技巧</div>
+      <div>https://asurahu.github.io/2022/09/19/vue/vue-tips/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>古月</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 古月">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/19/js/jegexp-common/" title="常用正则表达式">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">常用正则表达式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/18/node/nvm/" title="使用nvm管理 node 版本">
+                        <span class="hidden-mobile">使用nvm管理 node 版本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"1O1KixV0bmlOoZXiN6UrLUAn-gzGzoHsz","appKey":"xJf3rBwmpsNyay7bIo1CK4iE","path":"window.location.pathname","placeholder":"请开始你的表演","avatar":"wavatar","meta":["nick"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
