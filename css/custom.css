@@ -1,3 +1,4 @@
+/* ----------- begin ----------- 增加阅读区宽度 */
 @media (min-width: 1200px) {
   .container, .container-lg, .container-md, .container-sm, .container-xl {
     max-width: 1300px;
@@ -8,3 +9,4 @@
   padding-left: 5%;
   padding-right: 5%;
 }
+/* ----------- end ----------- 增加阅读区宽度 */
