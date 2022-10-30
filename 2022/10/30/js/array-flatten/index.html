@@ -1,0 +1,814 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/hu-icon1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#419DFF">
+  <meta name="author" content="古月">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="问题描述： 将多级嵌套数组，类似: [1, [2, [3, [4, 5]]], 6] 将其扁平化处理， 得到: [1,2,3,4,5,6] 扁平化定义：扁平化就是将多维数组变成一维数组，不存在数组的嵌套 实现扁平化的方法，封装 flatten备用数组： 123const arr &#x3D; [1, [2, [3, [4, 5]]], 6, [7, 8, [9, 10]]];const arr2 &#x3D; [1,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组扁平化">
+<meta property="og:url" content="https://asurahu.github.io/2022/10/30/js/array-flatten/index.html">
+<meta property="og:site_name" content="古月|个人博客">
+<meta property="og:description" content="问题描述： 将多级嵌套数组，类似: [1, [2, [3, [4, 5]]], 6] 将其扁平化处理， 得到: [1,2,3,4,5,6] 扁平化定义：扁平化就是将多维数组变成一维数组，不存在数组的嵌套 实现扁平化的方法，封装 flatten备用数组： 123const arr &#x3D; [1, [2, [3, [4, 5]]], 6, [7, 8, [9, 10]]];const arr2 &#x3D; [1,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://asurahu.github.io/img/js/js.jpeg">
+<meta property="article:published_time" content="2022-10-30T10:34:06.000Z">
+<meta property="article:modified_time" content="2022-10-30T16:40:09.584Z">
+<meta property="article:author" content="古月">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES6">
+<meta property="article:tag" content="Array">
+<meta property="article:tag" content="扁平化">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://asurahu.github.io/img/js/js.jpeg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>数组扁平化 - 古月|个人博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"asurahu.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>古月|个人博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数组扁平化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        古月
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-30 18:34" pubdate>
+          2022年10月30日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数组扁平化</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>描述：</p>
+<p>将多级嵌套数组，类似: <code>[1, [2, [3, [4, 5]]], 6]</code> 将其扁平化处理， 得到: <code>[1,2,3,4,5,6]</code></p>
+<h2 id="扁平化"><a href="#扁平化" class="headerlink" title="扁平化"></a>扁平化</h2><p><strong>定义</strong>：扁平化就是将多维数组变成一维数组，不存在数组的嵌套</p>
+<h2 id="实现扁平化的方法，封装-flatten"><a href="#实现扁平化的方法，封装-flatten" class="headerlink" title="实现扁平化的方法，封装 flatten"></a>实现扁平化的方法，封装 <code>flatten</code></h2><p>备用数组：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, [<span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>]]], <span class="hljs-number">6</span>, [<span class="hljs-number">7</span>, <span class="hljs-number">8</span>, [<span class="hljs-number">9</span>, <span class="hljs-number">10</span>]]];<br><span class="hljs-keyword">const</span> arr2 = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">7</span>, [<span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>]];<br><span class="hljs-keyword">const</span> arr3 = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">false</span>,[<span class="hljs-number">0</span>, <span class="hljs-number">5</span>], <span class="hljs-title class_">NaN</span>, <span class="hljs-literal">null</span>, <span class="hljs-literal">undefined</span>, [<span class="hljs-literal">undefined</span>, <span class="hljs-number">11</span>]];<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-ES6-flat"><a href="#1-ES6-flat" class="headerlink" title="1. ES6 flat"></a>1. ES6 flat</h3><p>数组方法：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"><strong>Array.prototype.flat()</strong></a></p>
+<p><code>flat()</code> 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。</p>
+<ul>
+<li>语法：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-title function_">flat</span>()<br><span class="hljs-title function_">flat</span>(depth)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>参数：</li>
+</ul>
+<p><code>depth</code> (可选) 指定要提取嵌套数组的结构深度,默认值为 1</p>
+<ul>
+<li>返回值：</li>
+</ul>
+<p>返回一个新数组,包含数组与提取嵌套数组的所有元素的新数组</p>
+<p>使用 <code>Infinity</code> ，可展开任意深度的嵌套数组</p>
+<ul>
+<li>封装：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten1</span>(<span class="hljs-params">params</span>) &#123;<br>  <span class="hljs-keyword">return</span> params.<span class="hljs-title function_">flat</span>(<span class="hljs-title class_">Infinity</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-toString"><a href="#2-toString" class="headerlink" title="2. toString"></a>2. toString</h3><p>如果数组的项全为<font color="red">数字</font>，可以使用 <code>join()</code> ，<code>toString()</code>。可以利用数组 <code>toString()</code> 转为字符串。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten2</span>(<span class="hljs-params">arr</span>) &#123;<br>  <span class="hljs-keyword">return</span> arr.<span class="hljs-title function_">toString</span>().<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;,&#x27;</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span><span class="hljs-built_in">parseFloat</span>(item))<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-利用正则表达式"><a href="#3-利用正则表达式" class="headerlink" title="3. 利用正则表达式"></a>3. 利用正则表达式</h3><p><strong>原理</strong>：对于嵌套的数组,如果在字符串的角度上看就是多了很多<code>[</code> 和 <code>]</code>,如果把它们替换就可以实现简单的扁平化.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten3</span> (arr) &#123;<br>  <span class="hljs-keyword">let</span> str= <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(arr).<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/(\[|\])/g</span>, <span class="hljs-string">&#x27;&#x27;</span>);<br>  str = <span class="hljs-string">&#x27;[&#x27;</span> + str + <span class="hljs-string">&#x27;]&#x27;</span>;<br>  arr = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(str);<br>  <span class="hljs-keyword">return</span> arr<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-使用循环递归"><a href="#4-使用循环递归" class="headerlink" title="4. 使用循环递归"></a>4. 使用循环递归</h3><h4 id="4-1-循环-concat-push"><a href="#4-1-循环-concat-push" class="headerlink" title="4.1 循环 + concat + push"></a>4.1 循环 + <code>concat</code> + <code>push</code></h4><ul>
+<li>当只有一层嵌套数组使用 <code>push</code> 的方式扁平化</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> result = [];<br><span class="hljs-keyword">const</span> arr2 = [<span class="hljs-number">1</span>, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>], <span class="hljs-number">7</span>, [<span class="hljs-number">8</span>, <span class="hljs-number">9</span>, <span class="hljs-number">10</span>]];<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr2.<span class="hljs-property">length</span>; i++) &#123;<br>  result = result.<span class="hljs-title function_">concat</span>((arr2[i]));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如果有多层嵌套的数组就需要使用 <strong>递归的思想</strong> :</p>
+<ol>
+<li>循环判断数组的每一项是否是数组: <code>Array.isArray(arr[i])</code></li>
+<li>是数组就递归调用上面的扁平化一层的代码 <code>result = result.concat(flatten(arr[i]))</code>;</li>
+<li>不是数组,直接通过push添加到返回值数组</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten41</span>(<span class="hljs-params">arr</span>) &#123;<br>  <span class="hljs-keyword">let</span> result = [];<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-property">length</span>; i++) &#123;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(arr[i])) &#123;<br>      result = result.<span class="hljs-title function_">concat</span>(<span class="hljs-title function_">flatten</span>(arr[i]));<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      result.<span class="hljs-title function_">push</span>(arr[i])<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> result<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 递归版本的反嵌套</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten42</span>(<span class="hljs-params">array</span>) &#123;<br>  <span class="hljs-keyword">var</span> flattend = [];<br>  (<span class="hljs-keyword">function</span> <span class="hljs-title function_">flat</span>(<span class="hljs-params">array</span>) &#123;<br>    array.<span class="hljs-title function_">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">el</span>) &#123;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(el)) <span class="hljs-title function_">flat</span>(el);<br>      <span class="hljs-keyword">else</span> flattend.<span class="hljs-title function_">push</span>(el);<br>    &#125;);<br>  &#125;)(array);<br>  <span class="hljs-keyword">return</span> flattend;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-2-增加参数控制扁平化深度"><a href="#4-2-增加参数控制扁平化深度" class="headerlink" title="4.2 增加参数控制扁平化深度"></a>4.2 增加参数控制扁平化深度</h4><p>这个可以理解为手写数组的 <code>flat()</code> 方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// forEach 遍历数组会自动跳过空元素</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">eachFlat</span> = (<span class="hljs-params">arr = [], depth = <span class="hljs-number">1</span></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> result = []; <span class="hljs-comment">// 缓存递归结果</span><br>  <span class="hljs-comment">// 开始递归</span><br>  (<span class="hljs-keyword">function</span> <span class="hljs-title function_">flat</span>(<span class="hljs-params">arr, depth</span>) &#123;<br>    <span class="hljs-comment">// forEach 会自动去除数组空位</span><br>    arr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> &#123;<br>      <span class="hljs-comment">// 控制递归深度</span><br>      <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(item) &amp;&amp; depth &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 递归数组</span><br>        <span class="hljs-title function_">flat</span>(item, depth - <span class="hljs-number">1</span>)<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 缓存元素</span><br>        result.<span class="hljs-title function_">push</span>(item)<br>      &#125;<br>    &#125;)<br>  &#125;)(arr, depth)<br>  <span class="hljs-comment">// 返回递归结果</span><br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-comment">// for of 循环不能去除数组空位，需要手动去除</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">forFlat</span> = (<span class="hljs-params">arr = [], depth = <span class="hljs-number">1</span></span>) =&gt; &#123;<br>  <span class="hljs-keyword">const</span> result = [];<br>  (<span class="hljs-keyword">function</span> <span class="hljs-title function_">flat</span>(<span class="hljs-params">arr, depth</span>) &#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> item <span class="hljs-keyword">of</span> arr) &#123;<br>      <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(item) &amp;&amp; depth &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-title function_">flat</span>(item, depth - <span class="hljs-number">1</span>)<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 去除空元素，添加非 undefined 元素</span><br>        item !== <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> &amp;&amp; result.<span class="hljs-title function_">push</span>(item);<br>      &#125;<br>    &#125;<br>  &#125;)(arr, depth)<br>  <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-3-巧用数组的-reduce-方法"><a href="#4-3-巧用数组的-reduce-方法" class="headerlink" title="4.3 巧用数组的 reduce 方法"></a>4.3 巧用数组的 reduce 方法</h4><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">reduce</a> 方法为数组中的每个元素按序执行一个 <code>reducer</code> 函数,每一次运行 <code>reducer</code> 会将先前元素的计算结构作为参数传入,最后将其结果汇总为单个返回值。</p>
+<p>第一次执行回调函数时，不存在“上一次的计算结果”。如果需要回调函数从数组索引为 0 的元素开始执行，则需要传递初始值。否则，数组索引为 0 的元素将被作为初始值 <em>initialValue</em>，迭代器将从第二个元素开始执行（索引为 1 而不是 0）。</p>
+<ul>
+<li>语法</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 箭头函数</span><br><span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">previousValue, currentValue</span>) =&gt;</span> &#123; <span class="hljs-comment">/* … */</span> &#125; )<br><span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">previousValue, currentValue, currentIndex</span>) =&gt;</span> &#123; <span class="hljs-comment">/* … */</span> &#125; )<br><span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">previousValue, currentValue, currentIndex, array</span>) =&gt;</span> &#123; <span class="hljs-comment">/* … */</span> &#125; )<br><br><span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">previousValue, currentValue</span>) =&gt;</span> &#123; <span class="hljs-comment">/* … */</span> &#125; , initialValue)<br><span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">previousValue, currentValue, currentIndex</span>) =&gt;</span> &#123; <span class="hljs-comment">/* … */</span> &#125; , initialValue)<br><span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">previousValue, currentValue, currentIndex, array</span>) =&gt;</span> &#123; <span class="hljs-comment">/* … */</span> &#125;, initialValue)<br><br><span class="hljs-comment">// 回调函数</span><br><span class="hljs-title function_">reduce</span>(callbackFn)<br><span class="hljs-title function_">reduce</span>(callbackFn, initialValue)<br><br><span class="hljs-comment">// 内联回调函数</span><br><span class="hljs-title function_">reduce</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">previousValue, currentValue</span>) &#123; <span class="hljs-comment">/* … */</span> &#125;)<br><span class="hljs-title function_">reduce</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">previousValue, currentValue, currentIndex</span>) &#123; <span class="hljs-comment">/* … */</span> &#125;)<br><span class="hljs-title function_">reduce</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">previousValue, currentValue, currentIndex, array</span>) &#123; <span class="hljs-comment">/* … */</span> &#125;)<br><br><span class="hljs-title function_">reduce</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">previousValue, currentValue</span>) &#123; <span class="hljs-comment">/* … */</span> &#125;, initialValue)<br><span class="hljs-title function_">reduce</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">previousValue, currentValue, currentIndex</span>) &#123; <span class="hljs-comment">/* … */</span> &#125;, initialValue)<br><span class="hljs-title function_">reduce</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">previousValue, currentValue, currentIndex, array</span>) &#123; <span class="hljs-comment">/* … */</span> &#125;, initialValue)<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>参数</p>
+<ul>
+<li><p>callbackFn，一个“reducer”函数，包含四个参数：</p>
+<ul>
+<li><code>previousValue</code>：上一次调用 <code>callbackFn</code> 时的返回值。在第一次调用时，若指定了初始值 <code>initialValue</code>，其值则为 <code>initialValue</code>，否则为数组索引为 0 的元素 <code>array[0]</code>。</li>
+<li><code>currentValue</code>：数组中正在处理的元素。在第一次调用时，若指定了初始值 <code>initialValue</code>，其值则为数组索引为 0 的元素 <code>array[0]</code>，否则为 <code>array[1]</code>。</li>
+<li><code>currentIndex</code>：数组中正在处理的元素的索引。若指定了初始值 <code>initialValue</code>，则起始索引号为 0，否则从索引 1 起始。</li>
+<li>array：用于遍历的数组。</li>
+</ul>
+</li>
+<li><p>initialValue (可选)<br>作为第一次调用 <code>callback</code> 函数时参数 <code>previousValue</code> 的值。若指定了初始值 <code>initialValue</code>，则 <code>currentValue</code> 则将使用数组第一个元素；否则 <code>previousValue</code> 将使用数组第一个元素，而 <code>currentValue</code> 将使用数组第二个元素。</p>
+</li>
+</ul>
+</li>
+<li><p>返回值</p>
+</li>
+</ul>
+<p>使用“reducer”回调函数遍历整个数组后的结果。</p>
+<p>解析第一层数组时：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> result = arr.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">acc, val</span>) =&gt;</span> acc.<span class="hljs-title function_">concat</span>(val), []);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;result&#x27;</span>, result);<br></code></pre></td></tr></table></figure>
+
+<p>对于多层级嵌套的数组, 这个时候就需要使用递归的思想来解决问题了。再次遍历数组,发现数组元素任然是数组的时候,再次执行上面扁平化。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">flatten43</span> = (<span class="hljs-params">arr, deep = <span class="hljs-number">1</span></span>) =&gt; &#123;<br>  <span class="hljs-keyword">if</span> (deep &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> arr;<br>  <span class="hljs-keyword">return</span> arr.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">res, curr</span>) =&gt;</span> res.<span class="hljs-title function_">concat</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(curr) ? <span class="hljs-title function_">flatten43</span>(curr, deep - <span class="hljs-number">1</span>) : curr), [])<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-使用堆栈-stack-避免递归"><a href="#5-使用堆栈-stack-避免递归" class="headerlink" title="5. 使用堆栈 stack 避免递归"></a>5. 使用堆栈 stack 避免递归</h3><p>递归循环都可通过维护一个堆结构来解决</p>
+<p>如果不使用递归数组来实现扁平化,可以使用堆栈来解决</p>
+<p>深度的控制比较低效，因为需要检查每一个值的深度</p>
+<p>思路</p>
+<ul>
+<li>把数组通过一个栈来维护</li>
+<li>当栈不为空的时候循环执行处理</li>
+<li><code>pop()</code>将栈尾出栈</li>
+<li>如果出栈的元素是数组，就将该元素解构后每一元素进行入栈操作</li>
+<li>出栈的元素不是数组就<code>push</code>进返回值<code>res</code></li>
+<li>反转恢复原数组的顺序</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten5</span>(<span class="hljs-params">arr</span>) &#123;<br>  <span class="hljs-keyword">const</span> stack = [...arr];<br>  <span class="hljs-keyword">const</span> res = [];<br>  <span class="hljs-keyword">while</span> (stack.<span class="hljs-property">length</span>) &#123;<br>    <span class="hljs-comment">// 使用 pop 从 stack 中取出并移除值</span><br>    <span class="hljs-keyword">const</span> next = stack.<span class="hljs-title function_">pop</span>();<br>    <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(next)) &#123;<br>      <span class="hljs-comment">// 使用 push 送回内层数组中的元素，不会改动原始输入</span><br>      stack.<span class="hljs-title function_">push</span>(...next);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      res.<span class="hljs-title function_">push</span>(next);<br>    &#125;<br>  &#125;<br>  <span class="hljs-comment">// 反转恢复原数组的顺序</span><br>  <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">reverse</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-while-循环-some-方法"><a href="#6-while-循环-some-方法" class="headerlink" title="6. while 循环 + some 方法"></a>6. while 循环 + some 方法</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/some">some()</a> 方法: 测试数组中是不是至少有 1 个元素通过了被提供的函数测试。它返回的是一个 <code>Boolean</code> 类型的值。</p>
+<p>通过<code>some()</code>来判断数组中是否有数组，通过<code>while</code>不断循环执行判断, 如果是数组的话可以使用 <code>拓展运算符...</code> <code>...</code> 每次只能展开最外层的数组，加上<code>contact</code>来减少嵌套层数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten6</span>(<span class="hljs-params">arr</span>) &#123;<br>  <span class="hljs-keyword">while</span> (arr.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">item</span>=&gt;</span> <span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(item))) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(...arr)<br>    arr = [].<span class="hljs-title function_">concat</span>(...arr)<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr)<br>  &#125;<br>  <span class="hljs-keyword">return</span> arr<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="来吧，先展示"><a href="#来吧，先展示" class="headerlink" title="来吧，先展示"></a>来吧，先展示</h2><iframe
+  width="100%" height="500"
+  src="//jsrun.net/B6sKp/embedded/js,result/light"
+  allowfullscreen="allowfullscreen" frameborder="0"
+></iframe>
+
+<div class="note note-success">
+            <p>参考<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7118763684209524767#heading-1">《数组扁平化》</a></p>
+          </div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JavaScript/" class="category-chain-item">JavaScript</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JavaScript/">#JavaScript</a>
+      
+        <a href="/tags/ES6/">#ES6</a>
+      
+        <a href="/tags/Array/">#Array</a>
+      
+        <a href="/tags/%E6%89%81%E5%B9%B3%E5%8C%96/">#扁平化</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数组扁平化</div>
+      <div>https://asurahu.github.io/2022/10/30/js/array-flatten/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>古月</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 古月">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/30/node/npm-mirror-image/" title="淘宝镜像">
+                        <span class="hidden-mobile">淘宝镜像</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"1O1KixV0bmlOoZXiN6UrLUAn-gzGzoHsz","appKey":"xJf3rBwmpsNyay7bIo1CK4iE","path":"window.location.pathname","placeholder":"请开始你的表演","avatar":"wavatar","meta":["nick"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/code-rain.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
