@@ -32,7 +32,7 @@ function getRandomChar () {
 
 // 绘画函数
 function draw () {
-  ctx.fillStyle = 'rgba(240, 240, 240, 0.1)';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
   ctx.fillRect(0, 0, width, height);
 
   const fz = 20;

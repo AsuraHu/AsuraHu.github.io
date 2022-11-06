@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asurahu.github.io/img/wx/wx.jpeg">
 <meta property="article:published_time" content="2022-09-20T10:07:28.000Z">
-<meta property="article:modified_time" content="2022-10-28T15:42:05.785Z">
+<meta property="article:modified_time" content="2022-11-01T08:43:53.380Z">
 <meta property="article:author" content="古月">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="微信">
@@ -310,23 +310,28 @@
             <p>该功能是不能在本地或者微信开发者工具中测试的，所以要把项目部署到线上。<br>以下操作基于正式环境</p>
           </div>
 
-<h2 id="绑定安全域名"><a href="#绑定安全域名" class="headerlink" title="绑定安全域名"></a>绑定安全域名</h2><p>登录 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/">微信公众平台</a> 进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。<br><img src="/img/wx/wx1.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="绑定安全域名"><a href="#绑定安全域名" class="headerlink" title="绑定安全域名"></a>绑定安全域名</h2><p>登录 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/">微信公众平台</a> 进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。<br><img src="/img/wx/wx1.png" srcset="/img/loading.gif" lazyload alt="wx1.png"></p>
 <h2 id="设置-IP-白名单"><a href="#设置-IP-白名单" class="headerlink" title="设置 IP 白名单"></a>设置 IP 白名单</h2><p>获取签名时，要调用“获取access_token”接口，返回结果。<br>如非白名单IP调用，将返回错误码：40164。<br>见：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/cgi-bin/announce?action=getannouncement&key=1495617578&version=1&lang=zh_CN&platform=2&token=755171451">“获取access_token”接口新增IP白名单保护</a></p>
-<p><img src="/img/wx/wx2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="/img/wx/wx2.png" srcset="/img/loading.gif" lazyload alt="wx2.png"></p>
 <h2 id="引入JS文件"><a href="#引入JS文件" class="headerlink" title="引入JS文件"></a><span id="version-1.6">引入JS文件</span></h2><div class="note note-success">
             <p>注意<br>js-sdk 的版本要在 1.6 以上</p>
           </div>
 
 <h3 id="通过-script-标签"><a href="#通过-script-标签" class="headerlink" title="通过 script 标签"></a>通过 <code>script</code> 标签</h3><ul>
-<li>直接在 index.html 中引用：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://res.wx.qq.com/open/js/jweixin-1.6.0.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
+<li>直接在 index.html 中引用：</li>
 </ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://res.wx.qq.com/open/js/jweixin-1.6.0.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="通过-npm"><a href="#通过-npm" class="headerlink" title="通过 npm"></a>通过 npm</h3><ul>
-<li><p>直接在项目中安装相关版本的依赖：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install weixin-js-sdk<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>在项目页面引用：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> wx <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;weixin-js-sdk&#x27;</span><br></code></pre></td></tr></table></figure></li>
+<li>直接在项目中安装相关版本的依赖：</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install weixin-js-sdk<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>在项目页面引用：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> wx <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;weixin-js-sdk&#x27;</span><br></code></pre></td></tr></table></figure>
+
 <h2 id="忽略自定义标签"><a href="#忽略自定义标签" class="headerlink" title="忽略自定义标签"></a><span id="ignore-open-tag">忽略自定义标签</span></h2><p><code>wx-open-launch-weapp</code> 不是一个标准的 <code>html</code> 标签，直接使用虽然也可以但是 <code>vue</code> 会在 <code>console</code> 输出一大堆warn。</p>
 <p>所以要在 main.js 文件中忽略该标签：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 如果用到其他开放标签，就往里加</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-property">config</span>.<span class="hljs-property">ignoredElements</span> = [<span class="hljs-string">&#x27;wx-open-launch-weapp&#x27;</span>]<br></code></pre></td></tr></table></figure>
