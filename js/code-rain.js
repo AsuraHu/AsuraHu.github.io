@@ -4,6 +4,8 @@ const banner = document.getElementById('banner');
 const width = banner.clientWidth;
 const height = banner.clientHeight;
 const isHomePage = document.getElementById('subtitle').getAttribute('data-typed-text').includes('首页');
+// 获取当前主题 ： dark | light
+const theme = document.getElementsByTagName('html')[0].getAttribute('data-user-color-scheme'); 
 
 const cvs = document.createElement('canvas');
 
@@ -32,7 +34,7 @@ function getRandomChar () {
 
 // 绘画函数
 function draw () {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillStyle = theme === 'dark' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)';
   ctx.fillRect(0, 0, width, height);
 
   const fz = 20;

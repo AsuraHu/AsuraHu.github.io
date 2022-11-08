@@ -10,3 +10,13 @@
   padding-right: 5%;
 }
 /* ----------- end ----------- 增加阅读区宽度 */
+
+/* ----------- begin ----------- 修改亮/暗主题下的 h1 ~ h6 标题的颜色 */
+:root {
+  --post-heading-color: #419DFF;
+}
+
+[data-user-color-scheme="dark"] {
+  --post-heading-color: #c4c6c9;
+}
+/* ----------- end ----------- 修改亮/暗主题下的 h1 ~ h6 标题的颜色 */
