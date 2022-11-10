@@ -33,33 +33,6 @@
   
   
   <entry>
-    <title>八股文之Vue</title>
-    <link href="/2022/11/02/interview/vue/"/>
-    <url>/2022/11/02/interview/vue/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    <categories>
-      
-      <category>八股文</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Vue</tag>
-      
-      <tag>八股文</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>数组扁平化</title>
     <link href="/2022/10/30/js/array-flatten/"/>
     <url>/2022/10/30/js/array-flatten/</url>
@@ -649,7 +622,7 @@
     <link href="/2022/09/18/node/nvm/"/>
     <url>/2022/09/18/node/nvm/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>详细见 <a href="https://blog.csdn.net/qq_30376375/article/details/115877446">nvm介绍、nvm下载安装及使用</a></p></blockquote><h2 id="1-nvm介绍"><a href="#1-nvm介绍" class="headerlink" title="1. nvm介绍"></a>1. nvm介绍</h2><p style="text-indent: 2em">在工作中，我们可能同时在进行2个或者多个不同的项目开发，每个项目的需求不同，进而不同项目必须依赖不同版本的NodeJS运行环境，这种情况下，对于维护多个版本的node将会是一件非常麻烦的事情，nvm就是为解决这个问题而产生的，他可以方便的在同一台设备上进行多个node版本之间切换。</p><h2 id="2-nvm下载安装及使用"><a href="#2-nvm下载安装及使用" class="headerlink" title="2. nvm下载安装及使用"></a>2. nvm下载安装及使用</h2><h3 id="2-1-nvm下载"><a href="#2-1-nvm下载" class="headerlink" title="2.1 nvm下载"></a>2.1 nvm下载</h3><p>安装包下载地址：<a href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p><p>windows系统下载nvm-setup.zip安装包<br><img src="/img/node/node1.png"></p><h3 id="2-2-nvm安装"><a href="#2-2-nvm安装" class="headerlink" title="2.2 nvm安装"></a>2.2 nvm安装</h3><p>如果电脑上之前已经单独安装了node，先卸载<font color="red">(有的电脑不需要卸载也能安装成功，而且安装后能自动识别电脑上已经安装的node 版本)</font>，然后解压nvm-setup.zip安装包，进入解压的文件夹，双击exe后缀文件进行安装。<br><img src="/img/node/node2.png"></p><p>下面这个界面是选择安装nvm的路径，自己可以更改安装路径，一般默认路径。<font color='red'>(<strong>注意：安装路径不要有中文或者空格</strong>)</font><br><img src="/img/node/node3.png"></p><p>下面这个是nodejs的安装位置，如果没有nodejs文件夹就新建一个(后来发现他会自动生成一个快捷方式)。<br><img src="/img/node/node4.png"></p><p>安装完毕后输入 nvm -v 查看版本。<br><img src="/img/node/node5.png"></p><p><font color='red'>下面设置setting.txt，可忽略不设置</font></p><p>安装完毕后，找到安装的路径，一些简单配置，打开setting.txt<br><img src="/img/node/node6.png"></p><p>在后面添加这两行代码</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">node_mirror: https://npm.taobao.org/mirrors/node/<br>npm_mirror: https://npm.taobao.org/mirrors/npm/<br></code></pre></td></tr></table></figure><h3 id="2-3-nvm的使用"><a href="#2-3-nvm的使用" class="headerlink" title="2.3 nvm的使用"></a>2.3 nvm的使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvm off                     <span class="hljs-comment"># 禁用node.js版本管理(不卸载任何东西)</span><br>nvm on                      <span class="hljs-comment"># 启用node.js版本管理</span><br>nvm install &lt;version&gt;       <span class="hljs-comment"># 安装node.js的命名 version是版本号 例如：nvm install 8.12.0</span><br>nvm uninstall &lt;version&gt;     <span class="hljs-comment"># 卸载node.js是的命令，卸载指定版本的nodejs，当安装失败时卸载使用</span><br>nvm <span class="hljs-built_in">ls</span>                      <span class="hljs-comment"># 显示所有安装的node.js版本</span><br>nvm list available          <span class="hljs-comment"># 显示可以安装的所有node.js的版本</span><br>nvm use &lt;version&gt;           <span class="hljs-comment"># 切换到使用指定的nodejs版本</span><br>nvm v                       <span class="hljs-comment"># 显示nvm版本</span><br>nvm install stable          <span class="hljs-comment"># 安装最新稳定版</span><br></code></pre></td></tr></table></figure><p>如果使用node -v，提示node:command not found,则需要nvm use node版本号，见下图<br><img src="/img/node/node7.png"></p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>详细见 <a href="https://blog.csdn.net/qq_30376375/article/details/115877446">nvm介绍、nvm下载安装及使用</a></p></blockquote><h2 id="1-nvm介绍"><a href="#1-nvm介绍" class="headerlink" title="1. nvm介绍"></a>1. nvm介绍</h2><p style="text-indent: 2em">在工作中，我们可能同时在进行2个或者多个不同的项目开发，每个项目的需求不同，进而不同项目必须依赖不同版本的NodeJS运行环境，这种情况下，对于维护多个版本的node将会是一件非常麻烦的事情，nvm就是为解决这个问题而产生的，他可以方便的在同一台设备上进行多个node版本之间切换。</p><h2 id="2-nvm下载安装及使用"><a href="#2-nvm下载安装及使用" class="headerlink" title="2. nvm下载安装及使用"></a>2. nvm下载安装及使用</h2><h3 id="2-1-nvm下载"><a href="#2-1-nvm下载" class="headerlink" title="2.1 nvm下载"></a>2.1 nvm下载</h3><p>安装包下载地址：<a href="https://github.com/coreybutler/nvm-windows/releases">https://github.com/coreybutler/nvm-windows/releases</a></p><p>windows系统下载nvm-setup.zip安装包<br><img src="/img/node/node1.png"></p><h3 id="2-2-nvm安装"><a href="#2-2-nvm安装" class="headerlink" title="2.2 nvm安装"></a>2.2 nvm安装</h3><p>如果电脑上之前已经单独安装了node，先卸载<font color="red">(有的电脑不需要卸载也能安装成功，而且安装后能自动识别电脑上已经安装的node 版本)</font>，然后解压nvm-setup.zip安装包，进入解压的文件夹，双击exe后缀文件进行安装。<br><img src="/img/node/node2.png"></p><p>下面这个界面是选择安装nvm的路径，自己可以更改安装路径，一般默认路径。<font color='red'>(<strong>注意：安装路径不要有中文或者空格</strong>)</font><br><img src="/img/node/node3.png"></p><p>下面这个是nodejs的安装位置，如果没有nodejs文件夹就新建一个(后来发现他会自动生成一个快捷方式)。<br><img src="/img/node/node4.png"></p><p>安装完毕后输入 nvm -v 查看版本。<br><img src="/img/node/node5.png"></p><p><font color='red'>下面设置setting.txt，可忽略不设置</font></p><p>安装完毕后，找到安装的路径，一些简单配置，打开setting.txt<br><img src="/img/node/node6.png"></p><p>在后面添加这两行代码</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">node_mirror: https://npm.taobao.org/mirrors/node/<br>npm_mirror: https://npm.taobao.org/mirrors/npm/<br></code></pre></td></tr></table></figure><h3 id="2-3-nvm的使用"><a href="#2-3-nvm的使用" class="headerlink" title="2.3 nvm的使用"></a>2.3 nvm的使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">nvm off                     <span class="hljs-comment"># 禁用node.js版本管理(不卸载任何东西)</span><br>nvm on                      <span class="hljs-comment"># 启用node.js版本管理</span><br>nvm install &lt;version&gt;       <span class="hljs-comment"># 安装node.js的命名 version是版本号 例如：nvm install 8.12.0</span><br>nvm uninstall &lt;version&gt;     <span class="hljs-comment"># 卸载node.js是的命令，卸载指定版本的nodejs，当安装失败时卸载使用</span><br>nvm <span class="hljs-built_in">ls</span>                      <span class="hljs-comment"># 显示所有安装的node.js版本</span><br>nvm list available          <span class="hljs-comment"># 显示可以安装的所有node.js的版本</span><br>nvm use &lt;version&gt;           <span class="hljs-comment"># 切换到使用指定的nodejs版本</span><br>nvm v                       <span class="hljs-comment"># 显示nvm版本</span><br>nvm install stable          <span class="hljs-comment"># 安装最新稳定版</span><br></code></pre></td></tr></table></figure><p>如果使用<code>node -v</code>，提示<code>node:command not found</code>,则需要nvm use node版本号，见下图</p><p><img src="/img/node/node7.png" alt="nvm use"></p><div class="note note-success">            <p>2022-11-10 补充：使用 <code>nvm use</code> 切换 node 版本时出现乱码</p>          </div><h3 id="2-4-nvm-use-出现乱码"><a href="#2-4-nvm-use-出现乱码" class="headerlink" title="2.4 nvm use 出现乱码"></a>2.4 nvm use 出现乱码</h3><p>如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">C:\Users\10303&gt;nvm use 14.18.2<br><span class="hljs-built_in">exit</span> status 1: ��û���㹻��Ȩ��ִ�д˲�����<br></code></pre></td></tr></table></figure><p><strong>解决方法</strong>：以管理员身份运行 <code>cmd.exe</code></p>]]></content>
     
     
     <categories>
