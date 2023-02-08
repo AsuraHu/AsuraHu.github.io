@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://asurahu.github.io/img/js/js.jpeg">
 <meta property="article:published_time" content="2022-11-05T03:05:16.000Z">
-<meta property="article:modified_time" content="2022-11-19T02:09:12.053Z">
+<meta property="article:modified_time" content="2023-02-08T10:27:38.550Z">
 <meta property="article:author" content="古月">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="工具函数">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.6k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          10 分钟
+          22 分钟
         
       </span>
     
@@ -458,6 +458,28 @@
 <iframe
   width='100%' height='300'
   src='//jsrun.net/qAsKp/embedded/all/light'
+  allowfullscreen='allowfullscreen' frameborder='0'
+></iframe>
+
+<h2 id="计算对象数组中某几个属性的和"><a href="#计算对象数组中某几个属性的和" class="headerlink" title="计算对象数组中某几个属性的和"></a>计算对象数组中某几个属性的和</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs Typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 计算对象数组中某几个属性的和</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> keys string[] 需要计算的属性；如：[&#x27;age&#x27;, &#x27;money&#x27;]</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> list any[] 需要计算的数组;如：[&#123;id:1,age: 24,money: 3000&#125;,&#123;id:2,age:25,money:3500&#125;]</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> decimal number 小数位数</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@returns</span> object 返回统计的属性的合计值：如 &#123;age: 49, money: 6500&#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getSummaryCol = (<span class="hljs-attr">keys</span>: <span class="hljs-built_in">string</span>[], <span class="hljs-attr">list</span>: <span class="hljs-built_in">any</span>[], decimal?: <span class="hljs-built_in">number</span>): &#123;&#125; =&gt; &#123;<br>  <span class="hljs-keyword">const</span> obj = &#123;&#125;;<br>  keys.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">key: <span class="hljs-built_in">string</span></span>) =&gt;</span> &#123;<br>    obj[key] = list.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">sum, item</span>) =&gt;</span> &#123;<br>      <span class="hljs-comment">// 排除 NaN</span><br>      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> item[key] === <span class="hljs-string">&#x27;number&#x27;</span> &amp;&amp; item[key]) &#123;<br>        <span class="hljs-keyword">return</span> sum + item[key];<br>      &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> item[key] === <span class="hljs-string">&#x27;string&#x27;</span> &amp;&amp; item[key]) &#123;<br>        <span class="hljs-comment">// 排除空字符串</span><br>        <span class="hljs-keyword">return</span> sum + <span class="hljs-built_in">parseFloat</span>(item[key]);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> sum;<br>      &#125;<br>    &#125;, <span class="hljs-number">0</span>).<span class="hljs-title function_">toFixed</span>(decimal);<br>  &#125;);<br>  <span class="hljs-keyword">return</span> obj;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>试一下</li>
+</ul>
+<iframe
+  width='100%' height='300'
+  src='//jsrun.net/KLcKp/embedded/all/light'
+  allowfullscreen='allowfullscreen' frameborder='0'
+></iframe>
+
+<h2 id="格式化金钱"><a href="#格式化金钱" class="headerlink" title="格式化金钱"></a>格式化金钱</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 格式化金钱</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> money 金额</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> unit 单位: 如 ￥ $ 等</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param</span> decimal 小数位数</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@returns</span> 格式化后的金额</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> formatMoney = (<span class="hljs-attr">money</span>: <span class="hljs-built_in">number</span> | <span class="hljs-built_in">string</span>, unit?: <span class="hljs-built_in">string</span>, decimal?: <span class="hljs-built_in">number</span>): <span class="hljs-function"><span class="hljs-params">string</span> =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> money === <span class="hljs-string">&#x27;number&#x27;</span> &amp;&amp; money) &#123;<br>    <span class="hljs-keyword">return</span> unit ? <span class="hljs-string">`<span class="hljs-subst">$&#123;unit&#125;</span> <span class="hljs-subst">$&#123;money.toFixed(decimal)&#125;</span>`</span> : money.<span class="hljs-title function_">toFixed</span>(decimal);<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> money === <span class="hljs-string">&#x27;string&#x27;</span> &amp;&amp; money) &#123;<br>    <span class="hljs-keyword">return</span> unit ? <span class="hljs-string">`<span class="hljs-subst">$&#123;unit&#125;</span> <span class="hljs-subst">$&#123;<span class="hljs-built_in">parseFloat</span>(money).toFixed(decimal)&#125;</span>`</span> : <span class="hljs-built_in">parseFloat</span>(money).<span class="hljs-title function_">toFixed</span>(decimal);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">return</span> unit ? <span class="hljs-string">`<span class="hljs-subst">$&#123;unit&#125;</span> 0.<span class="hljs-subst">$&#123;<span class="hljs-string">&#x27;0&#x27;</span>.padEnd(decimal, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>`</span> : <span class="hljs-string">`0.<span class="hljs-subst">$&#123;<span class="hljs-string">&#x27;0&#x27;</span>.padEnd(decimal, <span class="hljs-string">&#x27;0&#x27;</span>)&#125;</span>`</span>;<br>  &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>试一下</li>
+</ul>
+<iframe
+  width='100%' height='300'
+  src='//jsrun.net/pLcKp/embedded/all/light'
   allowfullscreen='allowfullscreen' frameborder='0'
 ></iframe>
 
