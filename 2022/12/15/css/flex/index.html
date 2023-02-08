@@ -16,27 +16,26 @@
   <meta name="author" content="古月">
   <meta name="keywords" content="">
   
-    <meta name="description" content="防抖  节流               Tip防抖、节流函数更详细的说明：见函数节流和防抖             根据对象数组中某个字段进行分组1234567891011121314151617181920212223242526const arrGroup &#x3D; (arr, key) &#x3D;&gt; &amp;#123;  let newArr &#x3D; [];  let newObj &#x3D; &amp;#123;&amp;#12">
+    <meta name="description" content="子元素均分宽度子元素均分父元素宽度，且不受子元素的内容影响。 123456789101112131415.parent &amp;#123;  width: 100%;  height: 100vh;  display: flex;&amp;#125;.child &amp;#123;  flex-grow: 1;  flex-basis: 0;&amp;#125;&#x2F;* 或者 *&#x2F;.child &amp;#123;  flex: 1 0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用工具函数">
-<meta property="og:url" content="https://asurahu.github.io/2022/11/05/js/utils/index.html">
+<meta property="og:title" content="flex 布局">
+<meta property="og:url" content="https://asurahu.github.io/2022/12/15/css/flex/index.html">
 <meta property="og:site_name" content="古月|个人博客">
-<meta property="og:description" content="防抖  节流               Tip防抖、节流函数更详细的说明：见函数节流和防抖             根据对象数组中某个字段进行分组1234567891011121314151617181920212223242526const arrGroup &#x3D; (arr, key) &#x3D;&gt; &amp;#123;  let newArr &#x3D; [];  let newObj &#x3D; &amp;#123;&amp;#12">
+<meta property="og:description" content="子元素均分宽度子元素均分父元素宽度，且不受子元素的内容影响。 123456789101112131415.parent &amp;#123;  width: 100%;  height: 100vh;  display: flex;&amp;#125;.child &amp;#123;  flex-grow: 1;  flex-basis: 0;&amp;#125;&#x2F;* 或者 *&#x2F;.child &amp;#123;  flex: 1 0">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://asurahu.github.io/img/js/js.jpeg">
-<meta property="article:published_time" content="2022-11-05T03:05:16.000Z">
-<meta property="article:modified_time" content="2022-11-19T02:09:12.053Z">
+<meta property="og:image" content="https://asurahu.github.io/img/css/css.jpg">
+<meta property="article:published_time" content="2022-12-15T07:35:08.000Z">
+<meta property="article:modified_time" content="2022-12-15T07:42:31.374Z">
 <meta property="article:author" content="古月">
-<meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="工具函数">
+<meta property="article:tag" content="flex">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://asurahu.github.io/img/js/js.jpeg">
+<meta name="twitter:image" content="https://asurahu.github.io/img/css/css.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>常用工具函数 - 古月|个人博客</title>
+  <title>flex 布局 - 古月|个人博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -205,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="常用工具函数"></span>
+            <span id="subtitle" data-typed-text="flex 布局"></span>
           
         </div>
 
@@ -221,8 +220,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-05 11:05" pubdate>
-          2022年11月5日 上午
+        <time datetime="2022-12-15 15:35" pubdate>
+          2022年12月15日 下午
         </time>
       </span>
     
@@ -233,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          182 字
         
       </span>
     
@@ -244,7 +243,7 @@
         
         
         
-          10 分钟
+          2 分钟
         
       </span>
     
@@ -297,17 +296,17 @@
     
     <div class="category row nomargin-x">
       <a class="category-item 
-          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="JavaScript"
-        id="heading-686155af75a60a0f6e9d80c1f7edd3e9" role="tab" data-toggle="collapse" href="#collapse-686155af75a60a0f6e9d80c1f7edd3e9"
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="flex"
+        id="heading-897a779351421523cadbafccdce22efe" role="tab" data-toggle="collapse" href="#collapse-897a779351421523cadbafccdce22efe"
         aria-expanded="true"
       >
-        JavaScript
-        <span class="list-group-count">(8)</span>
+        flex
+        <span class="list-group-count">(1)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
-      <div class="category-collapse collapse show" id="collapse-686155af75a60a0f6e9d80c1f7edd3e9"
-           role="tabpanel" aria-labelledby="heading-686155af75a60a0f6e9d80c1f7edd3e9">
+      <div class="category-collapse collapse show" id="collapse-897a779351421523cadbafccdce22efe"
+           role="tabpanel" aria-labelledby="heading-897a779351421523cadbafccdce22efe">
         
         
           
@@ -316,73 +315,10 @@
     
       
       
-        <a href="/2022/10/01/js/limit/" title="函数节流和防抖"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">函数节流和防抖</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/11/05/js/utils/" title="常用工具函数"
+        <a href="/2022/12/15/css/flex/" title="flex 布局"
            class="list-group-item list-group-item-action
            active">
-          <span class="category-post">常用工具函数</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/09/19/js/jegexp-common/" title="常用正则表达式"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">常用正则表达式</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/10/20/js/array-unique/" title="数组去重的各种方法解析"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">数组去重的各种方法解析</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/10/30/js/array-flatten/" title="数组扁平化"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">数组扁平化</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/10/05/js/console/" title="浏览器调试 - console"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">浏览器调试 - console</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/11/16/js/first-letter/" title="获取文字首字母"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">获取文字首字母</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2022/10/02/js/copy/" title="解析赋值、浅拷贝和深拷贝的区别"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">解析赋值、浅拷贝和深拷贝的区别</span>
+          <span class="category-post">flex 布局</span>
         </a>
       
     
@@ -405,63 +341,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">常用工具函数</h1>
+            <h1 style="display: none">flex 布局</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><iframe
-  width='100%' height='300'
-  src="//jsrun.net/GzsKp/embedded/all/light"
-  allowfullscreen='allowfullscreen' frameborder='0'
-></iframe>
+                <h2 id="子元素均分宽度"><a href="#子元素均分宽度" class="headerlink" title="子元素均分宽度"></a>子元素均分宽度</h2><p>子元素均分父元素宽度，且不受子元素的内容影响。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;<br>  <span class="hljs-attribute">display</span>: flex;<br>&#125;<br><br><span class="hljs-selector-class">.child</span> &#123;<br>  <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">flex-basis</span>: <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">/* 或者 */</span><br><span class="hljs-selector-class">.child</span> &#123;<br>  <span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><iframe
-  width='100%' height='300'
-  src='//jsrun.net/eCsKp/embedded/all/light'
-  allowfullscreen='allowfullscreen' frameborder='0'
-></iframe>
-
-<div class="note note-success">
-            <p>Tip<br>防抖、节流函数更详细的说明：见<a target="_blank" rel="noopener" href="https://asurahu.gitee.io/2022/10/01/js/limit/">函数节流和防抖</a></p>
-          </div>
-
-<h2 id="根据对象数组中某个字段进行分组"><a href="#根据对象数组中某个字段进行分组" class="headerlink" title="根据对象数组中某个字段进行分组"></a>根据对象数组中某个字段进行分组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">arrGroup</span> = (<span class="hljs-params">arr, key</span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> newArr = [];<br>  <span class="hljs-keyword">let</span> newObj = &#123;&#125;;<br>  <br>  <span class="hljs-comment">// 利用对象的key值不允许重复的特性</span><br>  <span class="hljs-keyword">let</span> temp = &#123;&#125;;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-property">length</span>; i++) &#123;<br>    <span class="hljs-keyword">const</span> item = arr[i];<br>    <span class="hljs-keyword">if</span> (temp.<span class="hljs-title function_">hasOwnProperty</span>(item[key])) &#123;<br>      newArr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span> (v.<span class="hljs-property">key</span> === item[key]) &#123;<br>          v.<span class="hljs-property">list</span>.<span class="hljs-title function_">push</span>(item)<br>        &#125;<br>      &#125;)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      newObj = &#123;<br>        <span class="hljs-attr">key</span>: item[key],<br>        <span class="hljs-attr">list</span>: [item]<br>      &#125;<br>      temp[item[key]] = <span class="hljs-string">&#x27;0&#x27;</span><br>      newArr.<span class="hljs-title function_">push</span>(newObj)<br>    &#125;<br>  &#125;<br>  <br>  <span class="hljs-keyword">return</span> newArr;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p>使用：</p>
-<iframe
-  width='100%' height='300'
-  src='//jsrun.net/ECsKp/embedded/all/light'
-  allowfullscreen='allowfullscreen' frameborder='0'
-></iframe>
-
-<h2 id="要是能重来-数组排序-Array-sort"><a href="#要是能重来-数组排序-Array-sort" class="headerlink" title="要是能重来 - 数组排序 (Array.sort)"></a>要是能重来 - 数组排序 (Array.sort)</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">23</span>, <span class="hljs-number">22</span>, <span class="hljs-number">26</span>, <span class="hljs-number">21</span>];<br><br><span class="hljs-keyword">let</span> list = [<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;李四&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">23</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">22</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;赵六&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;王五&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">24</span> &#125;,<br>];<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>从小到大</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br>list.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.<span class="hljs-property">age</span> - b.<span class="hljs-property">age</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list);<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>从大到小</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a);<br>list.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b.<span class="hljs-property">age</span> - a.<span class="hljs-property">age</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list);<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>随机排序</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() - <span class="hljs-number">0.5</span>);<br>list.<span class="hljs-title function_">sort</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() - <span class="hljs-number">0.5</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list);<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>来吧，展示</li>
-</ul>
-<iframe
-  width='100%' height='300'
-  src='//jsrun.net/qAsKp/embedded/all/light'
-  allowfullscreen='allowfullscreen' frameborder='0'
-></iframe>
-
-<h2 id="未完，补充ing"><a href="#未完，补充ing" class="headerlink" title="未完，补充ing"></a>未完，补充ing</h2>
                 
               </div>
             
@@ -479,7 +366,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/JavaScript/" class="category-chain-item">JavaScript</a>
+  <a href="/categories/flex/" class="category-chain-item">flex</a>
   
   
 
@@ -494,9 +381,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/JavaScript/">#JavaScript</a>
-      
-        <a href="/tags/%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0/">#工具函数</a>
+        <a href="/tags/flex/">#flex</a>
       
     </div>
   
@@ -508,8 +393,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>常用工具函数</div>
-      <div>https://asurahu.github.io/2022/11/05/js/utils/</div>
+      <div>flex 布局</div>
+      <div>https://asurahu.github.io/2022/12/15/css/flex/</div>
     </div>
     <div class="license-meta">
       
@@ -521,7 +406,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月5日</div>
+          <div>2022年12月15日</div>
         </div>
       
       
@@ -553,9 +438,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/11/07/wx/hbuilderx-run-error/" title="微信小程序开发者工具 ? Enable IDE Service (y/N) ESC[27D ESC[27C">
+                      <a href="/2022/12/19/vue/vue3-remark/" title="Vue3 随手记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">微信小程序开发者工具 ? Enable IDE Service (y/N) ESC[27D ESC[27C</span>
+                        <span class="hidden-mobile">Vue3 随手记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -563,8 +448,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/30/js/array-flatten/" title="数组扁平化">
-                        <span class="hidden-mobile">数组扁平化</span>
+                      <a href="/2022/12/15/uniapp/style/" title="uni-app 解除微信样式隔离">
+                        <span class="hidden-mobile">uni-app 解除微信样式隔离</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

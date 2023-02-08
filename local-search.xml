@@ -4,6 +4,87 @@
   
   
   <entry>
+    <title>Vue3 随手记</title>
+    <link href="/2022/12/19/vue/vue3-remark/"/>
+    <url>/2022/12/19/vue/vue3-remark/</url>
+    
+    <content type="html"><![CDATA[<h2 id="props-设置默认值-setup-defineProps"><a href="#props-设置默认值-setup-defineProps" class="headerlink" title="props 设置默认值 - setup defineProps"></a><code>props</code> 设置默认值 - <code>setup</code> <code>defineProps</code></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script lang=<span class="hljs-string">&quot;ts&quot;</span> setup&gt;<br>  <br>  <span class="hljs-comment">// ts 写法</span><br>  <span class="hljs-keyword">const</span> props = <span class="hljs-title function_">withDefaults</span>(defineProps&lt;&#123;<br>    <span class="hljs-attr">name</span>: string;<br>    age?: number; <span class="hljs-comment">// 非必填</span><br>  &#125;&gt;(), &#123;<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;张三&#x27;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>, <span class="hljs-comment">// 设置默认值</span><br>  &#125;);<br><br>  <span class="hljs-comment">// 非 ts 写法</span><br>  <span class="hljs-keyword">const</span> props = <span class="hljs-title function_">defineProps</span>(&#123;<br>    <span class="hljs-attr">name</span>: &#123;<br>      <span class="hljs-attr">type</span>: string,<br>      <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span><br>    &#125;,<br>    <span class="hljs-attr">age</span>: &#123;<br>      <span class="hljs-attr">type</span>: number,<br>      <span class="hljs-attr">required</span>: <span class="hljs-literal">false</span>,<br>      <span class="hljs-attr">default</span>: <span class="hljs-number">18</span><br>    &#125;<br>  &#125;)<br>  <br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Vue</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Vue</tag>
+      
+      <tag>Vue3</tag>
+      
+      <tag>setupt</tag>
+      
+      <tag>Typescript</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>flex 布局</title>
+    <link href="/2022/12/15/css/flex/"/>
+    <url>/2022/12/15/css/flex/</url>
+    
+    <content type="html"><![CDATA[<h2 id="子元素均分宽度"><a href="#子元素均分宽度" class="headerlink" title="子元素均分宽度"></a>子元素均分宽度</h2><p>子元素均分父元素宽度，且不受子元素的内容影响。</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;<br>  <span class="hljs-attribute">display</span>: flex;<br>&#125;<br><br><span class="hljs-selector-class">.child</span> &#123;<br>  <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;<br>  <span class="hljs-attribute">flex-basis</span>: <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">/* 或者 */</span><br><span class="hljs-selector-class">.child</span> &#123;<br>  <span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>flex</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>flex</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>uni-app 解除微信样式隔离</title>
+    <link href="/2022/12/15/uniapp/style/"/>
+    <url>/2022/12/15/uniapp/style/</url>
+    
+    <content type="html"><![CDATA[<p>uniapp 给自定义组件或 uni-ui 等ui组件加class样式或修改样式在微信小程序不生效</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>微信小程序默认的组件隔离策略导致的。自定义组件还是 <code>uni-ui</code> 的组件都不行。</p><h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>在要修改样式的组件内，<code>data</code> 同级的地方加个 <strong>微信小程序</strong> 的配置即可。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js">&lt;script&gt;<br>  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>    <span class="hljs-attr">options</span>: &#123;<br>      <span class="hljs-attr">styleIsolation</span>: <span class="hljs-string">&#x27;shared&#x27;</span>, <span class="hljs-comment">// 解除样式隔离</span><br>    &#125;,<br>    data () &#123;&#125;,<br>  &#125;<br>&lt;/script&gt;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>uniapp</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>uniapp</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>获取文字首字母</title>
     <link href="/2022/11/16/js/first-letter/"/>
     <url>/2022/11/16/js/first-letter/</url>
@@ -62,7 +143,7 @@
     <link href="/2022/11/05/js/utils/"/>
     <url>/2022/11/05/js/utils/</url>
     
-    <content type="html"><![CDATA[<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><iframe  width='100%' height='300'  src="//jsrun.net/GzsKp/embedded/all/light"  allowfullscreen='allowfullscreen' frameborder='0'></iframe><h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><iframe  width='100%' height='300'  src='//jsrun.net/eCsKp/embedded/all/light'  allowfullscreen='allowfullscreen' frameborder='0'></iframe><div class="note note-success">            <p>Tip<br>防抖、节流函数更详细的说明：见<a href="https://asurahu.gitee.io/2022/10/01/js/limit/">函数节流和防抖</a></p>          </div><h2 id="根据对象数组中某个字段进行分组"><a href="#根据对象数组中某个字段进行分组" class="headerlink" title="根据对象数组中某个字段进行分组"></a>根据对象数组中某个字段进行分组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">arrGroup</span> = (<span class="hljs-params">arr, key</span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> newArr = [];<br>  <span class="hljs-keyword">let</span> newObj = &#123;&#125;;<br>  <br>  <span class="hljs-comment">// 利用对象的key值不允许重复的特性</span><br>  <span class="hljs-keyword">let</span> temp = &#123;&#125;;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-property">length</span>; i++) &#123;<br>    <span class="hljs-keyword">const</span> item = arr[i];<br>    <span class="hljs-keyword">if</span> (temp.<span class="hljs-title function_">hasOwnProperty</span>(item[key])) &#123;<br>      newArr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span> (v.<span class="hljs-property">key</span> === item[key]) &#123;<br>          v.<span class="hljs-property">list</span>.<span class="hljs-title function_">push</span>(item)<br>        &#125;<br>      &#125;)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      newObj = &#123;<br>        <span class="hljs-attr">key</span>: item[key],<br>        <span class="hljs-attr">list</span>: [item]<br>      &#125;<br>      temp[item[key]] = <span class="hljs-string">&#x27;0&#x27;</span><br>      newArr.<span class="hljs-title function_">push</span>(newObj)<br>    &#125;<br>  &#125;<br>  <br>  <span class="hljs-keyword">return</span> newArr;<br>&#125;;<br></code></pre></td></tr></table></figure><p>使用：</p><iframe  width='100%' height='300'  src='//jsrun.net/ECsKp/embedded/all/light'  allowfullscreen='allowfullscreen' frameborder='0'></iframe><h2 id="未完，补充ing"><a href="#未完，补充ing" class="headerlink" title="未完，补充ing"></a>未完，补充ing</h2>]]></content>
+    <content type="html"><![CDATA[<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><iframe  width='100%' height='300'  src="//jsrun.net/GzsKp/embedded/all/light"  allowfullscreen='allowfullscreen' frameborder='0'></iframe><h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><iframe  width='100%' height='300'  src='//jsrun.net/eCsKp/embedded/all/light'  allowfullscreen='allowfullscreen' frameborder='0'></iframe><div class="note note-success">            <p>Tip<br>防抖、节流函数更详细的说明：见<a href="https://asurahu.gitee.io/2022/10/01/js/limit/">函数节流和防抖</a></p>          </div><h2 id="根据对象数组中某个字段进行分组"><a href="#根据对象数组中某个字段进行分组" class="headerlink" title="根据对象数组中某个字段进行分组"></a>根据对象数组中某个字段进行分组</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> <span class="hljs-title function_">arrGroup</span> = (<span class="hljs-params">arr, key</span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> newArr = [];<br>  <span class="hljs-keyword">let</span> newObj = &#123;&#125;;<br>  <br>  <span class="hljs-comment">// 利用对象的key值不允许重复的特性</span><br>  <span class="hljs-keyword">let</span> temp = &#123;&#125;;<br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; arr.<span class="hljs-property">length</span>; i++) &#123;<br>    <span class="hljs-keyword">const</span> item = arr[i];<br>    <span class="hljs-keyword">if</span> (temp.<span class="hljs-title function_">hasOwnProperty</span>(item[key])) &#123;<br>      newArr.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span> (v.<span class="hljs-property">key</span> === item[key]) &#123;<br>          v.<span class="hljs-property">list</span>.<span class="hljs-title function_">push</span>(item)<br>        &#125;<br>      &#125;)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      newObj = &#123;<br>        <span class="hljs-attr">key</span>: item[key],<br>        <span class="hljs-attr">list</span>: [item]<br>      &#125;<br>      temp[item[key]] = <span class="hljs-string">&#x27;0&#x27;</span><br>      newArr.<span class="hljs-title function_">push</span>(newObj)<br>    &#125;<br>  &#125;<br>  <br>  <span class="hljs-keyword">return</span> newArr;<br>&#125;;<br></code></pre></td></tr></table></figure><p>使用：</p><iframe  width='100%' height='300'  src='//jsrun.net/ECsKp/embedded/all/light'  allowfullscreen='allowfullscreen' frameborder='0'></iframe><h2 id="要是能重来-数组排序-Array-sort"><a href="#要是能重来-数组排序-Array-sort" class="headerlink" title="要是能重来 - 数组排序 (Array.sort)"></a>要是能重来 - 数组排序 (Array.sort)</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">let</span> arr = [<span class="hljs-number">23</span>, <span class="hljs-number">22</span>, <span class="hljs-number">26</span>, <span class="hljs-number">21</span>];<br><br><span class="hljs-keyword">let</span> list = [<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;李四&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">23</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">22</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;赵六&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> &#125;,<br>  &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;王五&#x27;</span>, <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">24</span> &#125;,<br>];<br></code></pre></td></tr></table></figure><ul><li>从小到大</li></ul><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a - b);<br>list.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.<span class="hljs-property">age</span> - b.<span class="hljs-property">age</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list);<br></code></pre></td></tr></table></figure><ul><li>从大到小</li></ul><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b - a);<br>list.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> b.<span class="hljs-property">age</span> - a.<span class="hljs-property">age</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list);<br></code></pre></td></tr></table></figure><ul><li>随机排序</li></ul><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js">arr.<span class="hljs-title function_">sort</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() - <span class="hljs-number">0.5</span>);<br>list.<span class="hljs-title function_">sort</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() - <span class="hljs-number">0.5</span>);<br><br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(arr);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(list);<br></code></pre></td></tr></table></figure><ul><li>来吧，展示</li></ul><iframe  width='100%' height='300'  src='//jsrun.net/qAsKp/embedded/all/light'  allowfullscreen='allowfullscreen' frameborder='0'></iframe><h2 id="未完，补充ing"><a href="#未完，补充ing" class="headerlink" title="未完，补充ing"></a>未完，补充ing</h2>]]></content>
     
     
     <categories>
